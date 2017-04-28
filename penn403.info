@@ -5,3 +5,4 @@ version = "7.x-1.0"
 core = 7.x
 files[] = penn403.module
 files[] = penn403.install
+files[] = penn403.admin.inc
