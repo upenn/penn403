@@ -79,6 +79,14 @@ class Penn403Form extends ConfigFormBase {
       '#size' => sizeof($role_list),
     );
 
+    // Get the text to use for the link
+    $form['link_text'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Link Text'),
+      '#default_value' => $config->get('link_text'),
+      '#description' => $this->t('The text of the link to display on the site.'),
+    );
+
     return $form;
   }
 
@@ -103,6 +111,8 @@ class Penn403Form extends ConfigFormBase {
 
     $role_values = array_values($form_state->getValue('authorized_roles'));
     $config->set('authorized_roles', $role_values);
+
+    $config->set('link_text', $form_state->getValue('link_text'));
 
     $config->save();
     return parent::submitForm($form, $form_state);

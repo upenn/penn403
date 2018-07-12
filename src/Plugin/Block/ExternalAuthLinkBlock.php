@@ -44,7 +44,7 @@ class ExternalAuthLinkBlock extends BlockBase {
 
         $login_route = $route_provider->getRouteByName($login_route);
         $login_path = Url::fromRoute($login_route, [], $options);
-        $link = Link::fromTextAndUrl($this->t('Log in'), $login_path);
+        $link = Link::fromTextAndUrl($config->get('link_text'), $login_path);
         $link = $link->toString();
       } catch (\Exception $e) {
         // Drupal throws an exception if you try to get a non-existent route,
