@@ -57,4 +57,13 @@ class ExternalAuthLinkBlock extends BlockBase {
       '#markup' => $link,
     );
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    // Ensure this particular block isn't cached so that the destination URL is
+    // always up-to-date.
+    return 0;
+  }
 }
