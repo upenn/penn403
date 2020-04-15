@@ -106,7 +106,7 @@ function penn403_access_denied() {
       // here we are relying on the simplesamlphp_auth module
       $login_path = variable_get('simplesamlphp_auth_login_path', 'saml_login');
       $url = url($login_path, array('query' => array('destination' => request_path())));
-      header('Location: ' . $url, TRUE, 307);
+      header('Location: ' . $url, TRUE, 303);
     }
     else {
       $output = theme('penn403_login_required');
