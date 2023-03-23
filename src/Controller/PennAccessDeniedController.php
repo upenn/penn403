@@ -40,7 +40,7 @@ class PennAccessDeniedController extends ControllerBase {
     $current_user = \Drupal::currentUser();
     $user_roles = $current_user->getRoles();
 
-    if (isset($authorized_roles)) {
+    if (is_array($authorized_roles)) {
       $matching_roles = array_intersect($authorized_roles, $user_roles);
     }
     else {
