@@ -58,27 +58,6 @@ class Penn403Form extends ConfigFormBase {
         403 error page that includes a link to PennKey authentication.'),
     );
 
-
-    // Fetch roles to populate dropdown
-    $role_objects = Role::loadMultiple();
-    $role_list = [];
-
-    foreach ($role_objects as $role_key => $role_object) {
-    	$role_list[$role_key] = $role_object->get('label');
-    }
-
-    // Specify protected role(s)
-    $form['authorized_roles'] = array(
-      '#type' => 'select',
-      '#multiple' => TRUE,
-      '#title' => $this->t('Authorized Roles'),
-      '#description' => $this->t('Designate the roles which have access to the gated content'),
-      '#options' => $role_list,
-      '#default_value' => $config->get('authorized_roles'),
-      '#required' => TRUE,
-      '#size' => sizeof($role_list),
-    );
-
     // Get the text to use for the link
     $form['link_text'] = array(
       '#type' => 'textfield',
@@ -108,9 +87,6 @@ class Penn403Form extends ConfigFormBase {
     $config->set('auth_login_route', $form_state->getValue('auth_login_route'));
 
     $config->set('auto_redirect', $form_state->getValue('auto_redirect'));
-
-    $role_values = array_values($form_state->getValue('authorized_roles'));
-    $config->set('authorized_roles', $role_values);
 
     $config->set('link_text', $form_state->getValue('link_text'));
 
