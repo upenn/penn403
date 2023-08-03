@@ -1,5 +1,5 @@
 access_contact:
 auto_redirect: 1
-auth_login_route: 'simplesamlphp_auth.saml_login'
+auth_login_route: 'samlauth.saml_controller_login'
 authorized_roles:
 link_text: Log In
