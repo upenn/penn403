@@ -103,10 +103,10 @@ class PennAccessDeniedController extends ControllerBase {
     $options = ['query' => ['destination' => $current_url->toString()]];
 
     try {
-      $login_route = $route_provider->getRouteByName($login_route);
-      $link_url = Url::fromRoute($login_route, [], $options);
+      $login_route_route = $route_provider->getRouteByName($login_route);
+      $link_url = Url::fromRoute($login_route_route, [], $options);
     } catch (\Exception $e) {
-      $link_url = Url::fromUserInput('/saml_login', [], $options);
+      $link_url = Url::fromUserInput('/saml/login', [], $options);
     }
 
     $link = Link::fromTextAndUrl($this->t('Log in using your PennKey to access this content.'), $link_url);
