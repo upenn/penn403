@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Url;
@@ -68,7 +69,10 @@ class PennAccessDeniedController extends ControllerBase {
             $login_route = $route_provider->getRouteByName($login_route);
             $login_path = Url::fromRoute($login_route, [], $options);
 
-            $response = new RedirectResponse($login_path->toString());
+            $response_headers = [
+              'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            ];
+            $response = new TrustedRedirectResponse($login_path->toString(), 302, $response_headers);
 
             $cookie = new Cookie('simplesamlphp_auth_returnto', $current_url->toString(), time() + (60 * 60));
             $response->headers->setCookie($cookie);
