@@ -34,6 +34,15 @@ class PennAccessDeniedController extends ControllerBase {
     return $element;
   }
 
+  public function on403Title () {
+    if (\Drupal::currentUser()->isAnonymous()) {
+      return $this->t('Login Required');
+    }
+    else {
+      return $this->t('Insufficient Privileges');
+    }
+  }
+
   private function getMarkupForAccessLevel() {
     $config = $this->config('penn403.settings');
     $authorized_roles = $config->get('authorized_roles');
@@ -119,7 +128,6 @@ class PennAccessDeniedController extends ControllerBase {
 
     $output = '';
     $output .= '<div class="penn403-login">';
-    $output .= '<h2>' . $this->t('Login Required') . '</h2>';
     $output .= $link;
     $output .= '</div>';
 
