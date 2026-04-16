@@ -81,7 +81,7 @@ class PennAccessDeniedController extends ControllerBase {
             $response_headers = [
               'Cache-Control' => 'no-cache, no-store, must-revalidate',
             ];
-            $response = new TrustedRedirectResponse($login_path->toString(), 302, $response_headers);
+            $response = new TrustedRedirectResponse($login_path->toString(), 307, $response_headers);
 
             $cookie = new Cookie('simplesamlphp_auth_returnto', $current_url->toString(), time() + (60 * 60));
             $response->headers->setCookie($cookie);
